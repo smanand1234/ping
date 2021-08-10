@@ -1,12 +1,15 @@
 import argparse
 import asyncio
 import ipaddress
-#import aioping
-
-async def myping(ipaddr, timeout):
+import time
+from threading import *
+import aioping
+async def myping(ipaddr, timeout,obj):
       await asyncio.sleep(0)
       print("Pinging {}, timeout {}sec".format(ipaddr, timeout))
       aioping(ipaddr, timeout)
+      obj.release()
+
 
 def main():
        parser = argparse.ArgumentParser()
@@ -27,14 +30,12 @@ def main():
             timeout = args.timeout
        #Get the number of available io addresses to ping
        numip = len(addrlist)
+       obj = Semaphore(concurrent)
        i = 0
-       i = i+1
        while i < numip:
-           j = 0
-           while i < numip and j < concurrent:
-                asyncio.run(myping(addrlist[i], timeout))
-                i= i+1
-                j= j+1  
+           obj.acquire()
+           asyncio.run(myping(addrlist[i], timeout,obj))
+           i= i+1
 
 
 main()       
