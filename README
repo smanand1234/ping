@@ -1,0 +1,8 @@
+pingdiscover is a package that scans the network given in a 'network/prefix' format. The network/prefix format is expanded to a list of possible combinations of IP addresses and pings each address concurrently, to the maximum number of concurrent tasks given by the command line option --concurrent <number>. the timeout value can be given in seconds with option --timeout.
+Usage:
+pingdiscover network/prefix [--concurrent c] [--timeout t]
+
+Example:
+pingdiscover 192.168.0.0/24 --concurrent 5 --timeout 5
+
+Default concurrent value is 1, that is at a time it pings only one host in the network. The default timeout value is 5 seconds.

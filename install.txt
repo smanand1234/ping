@@ -1,0 +1,9 @@
+To download package ping, you can use the following git command in a computer where git has been installed:
+1. Login to your computer and open a terminal or command prompt.
+2. Make sure git is installed in your system.
+3. Run the git clone command:
+   git clone https://github.com/smanand1234/ping
+4. Go to the just created directory ping
+5. Make sure you have the latest python installed.
+6. Run python pingdiscover.py:
+   python pingdiscover.py
