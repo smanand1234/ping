@@ -5,8 +5,13 @@ import aioping
 async def myping(ipaddr, timeout,semaphore):
       await semaphore.acquire()
 #      await asyncio.sleep(0)
-      print("Pinging {}, timeout {}sec".format(ipaddr, timeout))
-      aioping(ipaddr, timeout)
+      try:
+           delay = await aioping.ping(ipaddr, timeout) *1000
+           print("Ping response from {} in {} ms".format(ipaddr, delay))
+
+      except TimeoutError:
+           print("Ping timeout from ", ipaddr)
+
       semaphore.release()
 
 
